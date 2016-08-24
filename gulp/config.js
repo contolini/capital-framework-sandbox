@@ -9,7 +9,7 @@ var glob = require( 'glob' );
 var loc = {
   src:  './src',
   dist: './dist',
-  lib:  './node_modules', // eslint-disable-line no-sync, no-inline-comments, max-len
+  lib:  './node_modules/capital-framework/src', // eslint-disable-line no-sync, no-inline-comments, max-len
   test: './test'
 };
 
@@ -44,7 +44,7 @@ module.exports = {
     src:      '/main.less',
     dest:     loc.dist + '/static/css',
     settings: {
-      paths: glob.sync(loc.lib + '/cf-*/src/'),
+      paths: [ loc.lib + '/' ].concat( glob.sync(loc.lib + '/cf-*/src/') ),
       compress: true
     }
   },
@@ -53,6 +53,9 @@ module.exports = {
       loc.src + '/static/js/main.js'
     ],
     dest: loc.dist + '/static/js/',
+    resolve: {
+      root: glob.sync( loc.lib + '/cf-*/src/' )
+    },
     name: 'main.js'
   },
   images: {

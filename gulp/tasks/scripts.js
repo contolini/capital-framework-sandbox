@@ -12,6 +12,7 @@ gulp.task( 'scripts', function() {
   return gulp.src( config.src )
     .pipe( $.sourcemaps.init() )
     .pipe( $.webpack( {
+      resolve: config.resolve,
       output: {
         filename: '[name].js'
       }
